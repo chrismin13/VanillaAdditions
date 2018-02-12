@@ -1,0 +1,61 @@
+# -------=======----- Vanilla Additions by chrismin13 -----=======------- #
+# = #
+# # If you want to enable or disable Custom Items, like Emerald Swords, use
+# # the Configuration of the Additions API!
+# = #
+# -------=======-------====== Configuration File =====-------=======------- #
+# -----=======-------=======-------=======-------=======-------=======----- #
+# = #
+# # config-version: This keeps track of the version of your Config. If new
+# #                 values are added by default, this will increase.
+# #                 DO NOT CHANGE - IT CHANGES BY ITSELF WHEN NEEDED!
+# = #
+# -----=======-------=======-------=======-------=======-------=======----- #
+# = #
+# # enabled-recipes: This is a list of the recipes that will be added. This
+# #                  does not include Custom Items, you can configure them
+# #                  in the Additions API Config. Valid values are:
+# #                  - SLABS_TO_FULL_BLOCKS (Converts two slabs, one on top of
+# #                    the other, to the regular block)
+# #                  - CLAY_CONVERSION (Converts a Clay Block to 4 Clay Balls)
+# #                  - STAIRS_TO_BLOCKS (Converts a grid of 2x2 of Stairs to
+# #                    a full block)
+# = #
+# ------=======-------=======-------=======-------=======-------=======----- #
+# = #
+# # enabled-mechanics: This is a list of the game mechanics that will be enabled.
+# #                    This does not include Custom Items, you can configure them
+# #                    in the Additions API Config. Valid values are:
+# #                    - WET_SPONGE_TO_SPONGE (Convert Wet Sponge to normal,
+# #                      dry Sponge when placed in the nether.
+# #                    - ARMOR_STANDS_WITH_ARMS (Add hands when an Armor Stand
+# #                      is spawned)
+# #                    - ARMOR_STAND_ITEM_IN_OFF_HAND (Add an item in the off
+# #                      hand of an Armor Stand by holding it in your Off Hand)
+# #                    - OPEN_BOOK_IN_ITEM_FRAME (Open any book in an Item
+# #                      frame by right clicking on it! No need to take it out.)
+# = #
+# ------=======-------=======-------=======-------=======-------=======----- #
+# = #
+# # blacklisted-enchantments: This list contains any enchantments that won't
+# #                           be changed when enchanting the Lapis Items.
+# #                           Their names can be found in the Spigot Docs:
+# #                           http://bit.ly/2Ccin0C
+# = #
+# ------=======-------=======-------=======-------=======-------=======----- #
+
+config-version: 3
+
+enabled-recipes:
+    - SLABS_TO_FULL_BLOCKS
+    - CLAY_CONVERSION
+    - STAIRS_TO_BLOCKS
+    
+enabled-mechanics:
+    - WET_SPONGE_TO_SPONG
+    - ARMOR_STANDS_WITH_ARMS
+    - ARMOR_STAND_ITEM_IN_OFF_HAND
+    - OPEN_BOOK_IN_ITEM_FRAME
+
+blacklisted-enchantments:
+    - NULL

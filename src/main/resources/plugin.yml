@@ -1,0 +1,5 @@
+name: VanillaAdditions
+version: 1.2.8
+main: com.chrismin13.vanillaadditions.VanillaAdditions
+author: chrismin13
+depend: [ AdditionsAPI ]
