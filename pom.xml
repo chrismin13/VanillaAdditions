@@ -63,8 +63,8 @@
             <groupId>AdditionsAPI</groupId>
             <artifactId>com.chrismin13</artifactId>
             <scope>system</scope>
-            <version>1.2.7</version>
-            <systemPath>C:/Users/chris/OneDrive/Eclipse Workspace/Test Server/plugins/AdditionsAPI-1.2.7-SNAPSHOT-shaded.jar</systemPath>
+            <version>1.2.8</version>
+            <systemPath>C:/Users/chris/OneDrive/Eclipse Workspace/Test Server/plugins/AdditionsAPI-1.2.8-SNAPSHOT-shaded.jar</systemPath>
         </dependency>
 
         <!-- If you are compiling this from the GitHub Repo, change systemPath to a Spigot jar of that version that is located on your computer. There is no maven repo that satisfies the dependencies in NMS, this is the best solution -->
