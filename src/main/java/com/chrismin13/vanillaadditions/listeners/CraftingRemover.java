@@ -28,7 +28,7 @@ public class CraftingRemover implements Listener {
 				|| result.equals(Material.WOOD_PICKAXE) || result.equals(Material.WOOD_SPADE)
 				|| result.equals(Material.WOOD_HOE)) && !AdditionsAPI.isCustomItem(inv.getResult())) {
 			Byte woodType = null;
-			for (int slot = 0; slot < 8; slot++) {
+			for (int slot = 0; slot < matrix.length - 1; slot++) {
 				if (matrix[slot] != null && matrix[slot].getType().equals(Material.WOOD)) {
 					if (woodType == null) {
 						woodType = matrix[slot].getData().getData();

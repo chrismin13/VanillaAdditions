@@ -17,7 +17,7 @@ import com.chrismin13.additionsapi.items.CustomItemStack;
 import com.chrismin13.vanillaadditions.VanillaAdditions;
 
 public class TreeFeller {
-	
+
 	private static JavaPlugin plugin = VanillaAdditions.getInstance();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -298,8 +298,13 @@ public class TreeFeller {
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 				@Override
 				public void run() {
-					currentBlock.breakNaturally();
-					TreeFeller.popLeaves(currentBlock, cStack.getItemStack());
+					if (cStack.getItemStack() != null) {
+						currentBlock.breakNaturally(cStack.getItemStack());
+						TreeFeller.popLeaves(currentBlock, cStack.getItemStack());
+					} else {
+						currentBlock.breakNaturally();
+						TreeFeller.popLeaves(currentBlock, null);
+					}
 					cStack.reduceDurability(player,
 							cStack.getCustomItem().getDurabilityMechanics().getBlockBreak(currentBlock));
 					world.playSound(currentBlock.getLocation(), Sound.BLOCK_WOOD_BREAK, 1.0F, 1.0F);
@@ -328,7 +333,10 @@ public class TreeFeller {
 							// @SuppressWarnings("deprecation")
 							@Override
 							public void run() {
-								target.breakNaturally(item);
+								if (item != null)
+									target.breakNaturally(item);
+								else 
+									target.breakNaturally();
 								target.getWorld().playSound(target.getLocation(), Sound.BLOCK_GRASS_BREAK, 0.125F,
 										1.0F);
 								// if (useParticleLIB)
