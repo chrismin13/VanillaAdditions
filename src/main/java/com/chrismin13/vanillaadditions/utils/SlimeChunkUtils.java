@@ -20,7 +20,7 @@ public class SlimeChunkUtils {
 			return true;
 
 		Biome biome = location.getBlock().getBiome();
-		if (biome.equals(Biome.SWAMPLAND))
+		if (biome.equals(Biome.SWAMP))
 			return true;
 
 		return false;

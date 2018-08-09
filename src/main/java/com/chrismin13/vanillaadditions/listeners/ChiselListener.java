@@ -1,6 +1,5 @@
 package com.chrismin13.vanillaadditions.listeners;
 
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +16,6 @@ import com.chrismin13.vanillaadditions.permissions.ChiselPermissions;
 
 public class ChiselListener implements Listener {
 
-	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onBlockBreak(CustomItemBlockBreakEvent customEvent) {
 		if (customEvent.isCancelled())
@@ -41,11 +39,7 @@ public class ChiselListener implements Listener {
 
 		event.setCancelled(true);
 
-		Material material = block.getType();
-		byte data = block.getData();
-		chisel.convertToChiseled(block);
-
-		if (!block.getType().equals(material) || data != block.getData())
+		if (chisel.convertToChiseled(block))
 			cStack.reduceDurability(player, 1);
 	}
 

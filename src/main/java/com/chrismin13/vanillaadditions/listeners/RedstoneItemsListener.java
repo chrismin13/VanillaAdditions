@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Powerable;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -30,7 +32,6 @@ public class RedstoneItemsListener implements Listener {
 	private ArrayList<Block> blocks = new ArrayList<Block>();
 	private ArrayList<String> cooldown = new ArrayList<String>();
 
-	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		if (event.isCancelled())
@@ -58,36 +59,43 @@ public class RedstoneItemsListener implements Listener {
 		if (cooldown.contains(serializedBlock))
 			return;
 
-		if (block.getType() == Material.REDSTONE_LAMP_OFF) {
+		if (block.getType() == Material.REDSTONE_LAMP) {
 
-			Block redstoneBlock = block.getLocation().add(0, -1, 0).getBlock();
-			if (!redstoneBlock.getState().getClass().getName().endsWith("CraftBlockState"))
-				redstoneBlock = block.getLocation().add(0, -1, 0).getBlock();
-			if (!redstoneBlock.getState().getClass().getName().endsWith("CraftBlockState"))
-				redstoneBlock = block.getLocation().add(1, 0, 0).getBlock();
-			if (!redstoneBlock.getState().getClass().getName().endsWith("CraftBlockState"))
-				redstoneBlock = block.getLocation().add(-1, 0, 0).getBlock();
-			if (!redstoneBlock.getState().getClass().getName().endsWith("CraftBlockState"))
-				redstoneBlock = block.getLocation().add(0, 0, 1).getBlock();
-			if (!redstoneBlock.getState().getClass().getName().endsWith("CraftBlockState")) 
-				redstoneBlock = block.getLocation().add(0, 0, -1).getBlock();
-			if (!redstoneBlock.getState().getClass().getName().endsWith("CraftBlockState")) 
-				return;
-			
-			final Block b = redstoneBlock;
-			Material type = b.getType();
-			byte data = b.getData();
+			Powerable power = (Powerable) block.getBlockData();
 
-			b.setType(Material.REDSTONE_BLOCK);
-			blocks.add(block);
+			if (!power.isPowered()) {
 
-			Bukkit.getScheduler().runTask(VanillaAdditions.getInstance(), () -> {
-				b.setType(type);
-				b.setData(data);
-			});
+				Block redstoneBlock = block.getLocation().add(0, -1, 0).getBlock();
+				if (!redstoneBlock.getState().getClass().getName().endsWith("CraftBlockState"))
+					redstoneBlock = block.getLocation().add(0, -1, 0).getBlock();
+				if (!redstoneBlock.getState().getClass().getName().endsWith("CraftBlockState"))
+					redstoneBlock = block.getLocation().add(1, 0, 0).getBlock();
+				if (!redstoneBlock.getState().getClass().getName().endsWith("CraftBlockState"))
+					redstoneBlock = block.getLocation().add(-1, 0, 0).getBlock();
+				if (!redstoneBlock.getState().getClass().getName().endsWith("CraftBlockState"))
+					redstoneBlock = block.getLocation().add(0, 0, 1).getBlock();
+				if (!redstoneBlock.getState().getClass().getName().endsWith("CraftBlockState"))
+					redstoneBlock = block.getLocation().add(0, 0, -1).getBlock();
+				if (!redstoneBlock.getState().getClass().getName().endsWith("CraftBlockState"))
+					return;
 
-		} else if (block.getType().equals(Material.REDSTONE_LAMP_ON)) {
-			block.setType(Material.REDSTONE_LAMP_OFF);
+				final Block b = redstoneBlock;
+				Material type = b.getType();
+				BlockData data = b.getBlockData();
+
+				b.setType(Material.REDSTONE_BLOCK);
+				blocks.add(block);
+
+				Bukkit.getScheduler().runTask(VanillaAdditions.getInstance(), () -> {
+					b.setType(type);
+					b.setBlockData(data);
+				});
+
+			} else {
+				block.setType(Material.REDSTONE_LAMP);
+				power.setPowered(false);
+				block.setBlockData(power);
+			}
 		} else {
 			return;
 		}

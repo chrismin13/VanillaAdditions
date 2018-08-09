@@ -13,7 +13,7 @@ public class EndStoneSickle extends EndStoneItem implements SickleAbilities {
 	public EndStoneSickle() {
 		super(DamageableItem.STONE_HOE, "vanilla_additions:end_stone_sickle", "End Stone Sickle", "end_stone_sickle");
 
-		modifyCustomItem(this, new RecipeIngredient(Material.ENDER_STONE));
+		modifyCustomItem(this, new RecipeIngredient(Material.END_STONE));
 	}
 
 	@Override

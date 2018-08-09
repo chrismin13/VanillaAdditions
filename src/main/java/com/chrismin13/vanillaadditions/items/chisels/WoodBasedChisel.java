@@ -10,10 +10,10 @@ import us.fihgu.toolbox.item.DamageableItem;
 
 public class WoodBasedChisel extends WoodBasedItem implements ChiselAbilities {
 
-	public WoodBasedChisel(byte materialData, String woodType, String textureName, String displayName) {
-		super(DamageableItem.WOODEN_PICKAXE, materialData, woodType, textureName, displayName, "wooden_chisel");
+	public WoodBasedChisel(Material material, String woodType, String textureName, String displayName) {
+		super(DamageableItem.WOODEN_PICKAXE, woodType, textureName, displayName, "wooden_chisel");
 		
-		modifyCustomItem(this, new RecipeIngredient(Material.WOOD, materialData));
+		modifyCustomItem(this, new RecipeIngredient(material));
 	}
 
 }

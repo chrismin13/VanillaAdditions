@@ -13,7 +13,7 @@ public class LapisArmor extends AverageLeatherArmor {
 	public LapisArmor(ArmorType armorType) {
 		super(armorType, armorType.getLeatherMaterial().getMaxDurability(),
 				"vanilla_additions:lapis_" + armorType.toString().toLowerCase(), "Lapis " + armorType.toIngameString(),
-				Color.fromRGB(34, 75, 175), new RecipeIngredient(Material.INK_SACK, (byte) 4), MaterialUtils.getBaseArmor(armorType.getIronMaterial()),
+				Color.fromRGB(34, 75, 175), new RecipeIngredient(Material.LAPIS_LAZULI), MaterialUtils.getBaseArmor(armorType.getIronMaterial()),
 				MaterialUtils.getBaseArmorToughness(armorType.getIronMaterial()));
 	}
 }

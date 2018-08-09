@@ -10,6 +10,6 @@ public class ClayItem extends AverageTexturedTool{
 
 	public ClayItem(DamageableItem damageableItem, String customItemIdName, String displayName,
 			String textureName) {
-		super(damageableItem, Material.GOLD_SWORD.getMaxDurability(), customItemIdName, displayName, textureName);
+		super(damageableItem, Material.GOLDEN_SWORD.getMaxDurability(), customItemIdName, displayName, textureName);
 	}
 }

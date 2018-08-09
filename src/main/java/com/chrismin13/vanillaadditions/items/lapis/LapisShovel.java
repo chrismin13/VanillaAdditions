@@ -10,6 +10,6 @@ public class LapisShovel extends LapisItem {
 
 	public LapisShovel() {
 		super(DamageableItem.IRON_SHOVEL, "vanilla_additions:lapis_shovel", "Lapis Shovel", "lapis_shovel");
-		addAllCustomRecipes(getToolType().getCustomShapedRecipe(new RecipeIngredient(Material.INK_SACK, (byte) 4), new RecipeIngredient(Material.STICK)));
+		addAllCustomRecipes(getToolType().getCustomShapedRecipe(new RecipeIngredient(Material.LAPIS_LAZULI), new RecipeIngredient(Material.STICK)));
 	}
 }

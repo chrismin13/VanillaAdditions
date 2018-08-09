@@ -10,6 +10,6 @@ public class LapisItem extends AverageTexturedTool {
 
 	public LapisItem(DamageableItem damageableItem, String customItemIdName, String displayName,
 			String textureName) {
-		super(damageableItem, Material.WOOD_SWORD.getMaxDurability(), customItemIdName, displayName, textureName);
+		super(damageableItem, Material.WOODEN_SWORD.getMaxDurability(), customItemIdName, displayName, textureName);
 	}
 }

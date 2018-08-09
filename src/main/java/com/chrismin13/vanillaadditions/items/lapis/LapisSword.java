@@ -10,6 +10,6 @@ public class LapisSword extends LapisItem {
 
 	public LapisSword() {
 		super(DamageableItem.IRON_SWORD, "vanilla_additions:lapis_sword", "Lapis Sword", "lapis_sword");
-		addAllCustomRecipes(getToolType().getCustomShapedRecipe(new RecipeIngredient(Material.INK_SACK, (byte) 4), new RecipeIngredient(Material.STICK)));
+		addAllCustomRecipes(getToolType().getCustomShapedRecipe(new RecipeIngredient(Material.LAPIS_LAZULI), new RecipeIngredient(Material.STICK)));
 	}
 }

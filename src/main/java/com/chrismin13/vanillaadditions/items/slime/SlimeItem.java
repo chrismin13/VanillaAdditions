@@ -14,7 +14,7 @@ public class SlimeItem extends AverageTexturedTool{
 
 	public SlimeItem(DamageableItem damageableItem, String customItemIdName, String displayName,
 			String textureName) {
-		super(damageableItem, Material.WOOD_SWORD.getMaxDurability(), customItemIdName, displayName, textureName);
+		super(damageableItem, Material.WOODEN_SWORD.getMaxDurability(), customItemIdName, displayName, textureName);
 		addAttackSpeed(MaterialUtils.getBaseSpeed(getMaterial()));
 		addAttackDamage(MaterialUtils.getBaseDamage(getMaterial()));
 		addAttribute(AttributeType.GENERIC_KNOCKBACK_RESISTANCE, -0.1, EquipmentSlot.HAND, Operation.ADD_NUMBER);

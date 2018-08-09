@@ -10,10 +10,10 @@ import us.fihgu.toolbox.item.DamageableItem;
 
 public class WoodBasedSickle extends WoodBasedItem implements SickleAbilities {
 
-	public WoodBasedSickle(byte materialData, String woodType, String textureName, String displayName) {
-		super(DamageableItem.WOODEN_HOE, materialData, woodType, textureName, displayName, "wooden_sickle");
+	public WoodBasedSickle(Material material, String woodType, String textureName, String displayName) {
+		super(DamageableItem.WOODEN_HOE, woodType, textureName, displayName, "wooden_sickle");
 
-		modifyCustomItem(this, new RecipeIngredient(Material.WOOD, materialData));
+		modifyCustomItem(this, new RecipeIngredient(material));
 	}
 
 	@Override

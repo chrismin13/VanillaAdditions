@@ -1,7 +1,6 @@
 package com.chrismin13.vanillaadditions.listeners;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,6 +31,7 @@ import org.bukkit.inventory.PlayerInventory;
 
 import com.chrismin13.additionsapi.AdditionsAPI;
 import com.chrismin13.additionsapi.items.CustomItemStack;
+import com.chrismin13.additionsapi.utils.MaterialUtils;
 import com.chrismin13.vanillaadditions.items.SlimeBucket;
 import com.chrismin13.vanillaadditions.utils.MobUtils;
 import com.chrismin13.vanillaadditions.utils.SlimeChunkUtils;
@@ -191,19 +191,6 @@ public class SlimeBucketListener implements Listener {
 		}
 	}
 
-	static List<Material> interactables = Arrays.asList(Material.ACACIA_DOOR, Material.ACACIA_FENCE_GATE,
-			Material.ANVIL, Material.BEACON, Material.BED, Material.BIRCH_DOOR, Material.BIRCH_FENCE_GATE,
-			Material.BOAT, Material.BOAT_ACACIA, Material.BOAT_BIRCH, Material.BOAT_DARK_OAK, Material.BOAT_JUNGLE,
-			Material.BOAT_SPRUCE, Material.BREWING_STAND, Material.COMMAND, Material.CHEST, Material.DARK_OAK_DOOR,
-			Material.DARK_OAK_FENCE_GATE, Material.DAYLIGHT_DETECTOR, Material.DAYLIGHT_DETECTOR_INVERTED,
-			Material.DISPENSER, Material.DROPPER, Material.ENCHANTMENT_TABLE, Material.ENDER_CHEST, Material.FENCE_GATE,
-			Material.FURNACE, Material.HOPPER, Material.HOPPER_MINECART, Material.ITEM_FRAME, Material.JUNGLE_DOOR,
-			Material.JUNGLE_FENCE_GATE, Material.LEVER, Material.MINECART, Material.NOTE_BLOCK,
-			Material.POWERED_MINECART, Material.REDSTONE_COMPARATOR, Material.REDSTONE_COMPARATOR_OFF,
-			Material.REDSTONE_COMPARATOR_ON, Material.SIGN, Material.SIGN_POST, Material.STORAGE_MINECART,
-			Material.TRAP_DOOR, Material.TRAPPED_CHEST, Material.WALL_SIGN, Material.WOOD_BUTTON, Material.WOOD_DOOR,
-			Material.WORKBENCH);
-
 	@EventHandler
 	public void onSlimeBucketBlockClick(PlayerInteractEvent event) {
 		if (event.isCancelled())
@@ -222,7 +209,7 @@ public class SlimeBucketListener implements Listener {
 			return;
 
 		if (event.getAction() == Action.RIGHT_CLICK_BLOCK
-				&& (!interactables.contains(event.getClickedBlock().getType()) || player.isSneaking())) {
+				&& (!MaterialUtils.isInteractable(event.getClickedBlock().getType()) || player.isSneaking())) {
 			if (event.getClickedBlock() == null)
 				return;
 			if (MobUtils.spawnSlime(event.getClickedBlock(), event.getBlockFace())
@@ -263,7 +250,8 @@ public class SlimeBucketListener implements Listener {
 		for (ItemStack item : inventory.getContents()) {
 			if (AdditionsAPI.isCustomItem(item)) {
 				CustomItemStack cStack = new CustomItemStack(item);
-				if (cStack.getCustomItem() instanceof SlimeBucket && !cStack.getTexture().equals("jumping_slime_bucket"))
+				if (cStack.getCustomItem() instanceof SlimeBucket
+						&& !cStack.getTexture().equals("jumping_slime_bucket"))
 					cStack.setTexture("jumping_slime_bucket");
 			}
 		}

@@ -10,6 +10,6 @@ public class LapisPickaxe extends LapisItem {
 
 	public LapisPickaxe() {
 		super(DamageableItem.IRON_PICKAXE, "vanilla_additions:lapis_pickaxe", "Lapis Pickaxe", "lapis_pickaxe");
-		addAllCustomRecipes(getToolType().getCustomShapedRecipe(new RecipeIngredient(Material.INK_SACK, (byte) 4), new RecipeIngredient(Material.STICK)));
+		addAllCustomRecipes(getToolType().getCustomShapedRecipe(new RecipeIngredient(Material.LAPIS_LAZULI), new RecipeIngredient(Material.STICK)));
 	}
 }

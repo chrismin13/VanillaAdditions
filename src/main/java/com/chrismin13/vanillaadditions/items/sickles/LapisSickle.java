@@ -13,7 +13,7 @@ public class LapisSickle extends LapisItem implements SickleAbilities {
 	public LapisSickle() {
 		super(DamageableItem.IRON_HOE, "vanilla_additions:lapis_sickle", "Lapis Sickle", "lapis_sickle");
 
-		modifyCustomItem(this, new RecipeIngredient(Material.INK_SACK, (byte) 4));
+		modifyCustomItem(this, new RecipeIngredient(Material.LAPIS_LAZULI));
 	}
 
 	@Override

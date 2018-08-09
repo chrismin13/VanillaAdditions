@@ -25,8 +25,10 @@ public class BlockBreakListener implements Listener {
 		BlockBreakEvent breakEvent = event.getBlockBreakEvent();
 		Player player = breakEvent.getPlayer();
 		Block block = breakEvent.getBlock();
-		if (cItem instanceof DoubleAxeAbilities
-				&& (block.getType().equals(Material.LOG) || block.getType().equals(Material.LOG_2))) {
+		Material material = block.getType();
+		if (cItem instanceof DoubleAxeAbilities && (material.equals(Material.ACACIA_LOG)
+				|| material.equals(Material.BIRCH_LOG) || material.equals(Material.DARK_OAK_LOG)
+				|| material.equals(Material.JUNGLE_LOG) || material.equals(Material.SPRUCE_LOG))) {
 			((DoubleAxeAbilities) cItem).chopTree(player, block, cStack);
 		} else if (cItem instanceof SickleAbilities) {
 			((SickleAbilities) cItem).onUse(cStack, block, player);

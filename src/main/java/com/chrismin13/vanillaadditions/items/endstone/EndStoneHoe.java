@@ -9,7 +9,7 @@ public class EndStoneHoe extends EndStoneItem {
 	public EndStoneHoe() {
 		super(DamageableItem.STONE_HOE, "vanilla_additions:end_stone_hoe", "End Stone Hoe", "end_stone_hoe");
 
-		addAllCustomRecipes(getToolType().getCustomShapedRecipe(Material.ENDER_STONE, Material.STICK));
+		addAllCustomRecipes(getToolType().getCustomShapedRecipe(Material.END_STONE, Material.STICK));
 	}
 
 }

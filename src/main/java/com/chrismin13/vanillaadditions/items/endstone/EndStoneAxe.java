@@ -8,7 +8,7 @@ public class EndStoneAxe extends EndStoneItem {
 
 	public EndStoneAxe() {
 		super(DamageableItem.STONE_AXE, "vanilla_additions:end_stone_axe", "End Stone Axe", "end_stone_axe");
-		addAllCustomRecipes(getToolType().getCustomShapedRecipe(Material.ENDER_STONE, Material.STICK));
+		addAllCustomRecipes(getToolType().getCustomShapedRecipe(Material.END_STONE, Material.STICK));
 	}
 
 }

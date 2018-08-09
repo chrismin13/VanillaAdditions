@@ -12,7 +12,7 @@ public class EndStoneDoubleAxe extends EndStoneItem implements DoubleAxeAbilitie
 	public EndStoneDoubleAxe() {
 		super(DamageableItem.STONE_AXE, "vanilla_additions:end_stone_double_axe", "End Stone Double Axe",
 				"end_stone_double_axe");
-		modifyCustomItem(this, Material.ENDER_STONE);
+		modifyCustomItem(this, Material.END_STONE);
 	}
 
 }

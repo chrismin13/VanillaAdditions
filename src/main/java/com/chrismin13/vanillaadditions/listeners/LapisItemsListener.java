@@ -69,7 +69,7 @@ public class LapisItemsListener implements Listener {
 			if (inv.getSecondary() != null) {
 				ItemStack lapis = inv.getSecondary();
 
-				if (!(lapis.getType().equals(Material.INK_SACK) && lapis.getData().equals((byte) 4))) {
+				if (!lapis.getType().equals(Material.LAPIS_LAZULI)) {
 					int amount = lapis.getAmount();
 					Bukkit.getScheduler().scheduleSyncDelayedTask(VanillaAdditions.getInstance(), () -> {
 						lapis.setAmount(amount);

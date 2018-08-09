@@ -126,7 +126,6 @@ import com.chrismin13.vanillaadditions.items.slime.SlimePickaxe;
 import com.chrismin13.vanillaadditions.items.slime.SlimeShovel;
 import com.chrismin13.vanillaadditions.items.slime.SlimeSword;
 import com.chrismin13.vanillaadditions.items.wood.WoodBasedItem;
-import com.chrismin13.vanillaadditions.listeners.CraftingRemover;
 
 import us.fihgu.toolbox.item.DamageableItem;
 
@@ -138,19 +137,13 @@ public class Items implements Listener {
 	public void onInitialization(AdditionsAPIInitializationEvent event) {
 		event.addResourcePackFromPlugin(VanillaAdditions.getInstance(), "VanillaAdditions-1.1.zip");
 
-		String version = Bukkit.getServer().getVersion();
-
 		// REMOVE VANILLA WOOD RECIPES
-		if (version.contains("1.9") || version.contains("1.10") || version.contains("1.11")) {
-			List<Material> coincidingMaterials = Arrays.asList(Material.WOOD_SWORD, Material.WOOD_AXE,
-					Material.WOOD_PICKAXE, Material.WOOD_SPADE, Material.WOOD_HOE);
-			Iterator<Recipe> recipes = Bukkit.recipeIterator();
-			while (recipes.hasNext())
-				if (coincidingMaterials.contains(recipes.next().getResult().getType()))
-					recipes.remove();
-		} else {
-			Bukkit.getPluginManager().registerEvents(new CraftingRemover(), VanillaAdditions.getInstance());
-		}
+		List<Material> coincidingMaterials = Arrays.asList(Material.WOODEN_SWORD, Material.WOODEN_AXE,
+				Material.WOODEN_PICKAXE, Material.WOODEN_SHOVEL, Material.WOODEN_HOE);
+		Iterator<Recipe> recipes = Bukkit.recipeIterator();
+		while (recipes.hasNext())
+			if (coincidingMaterials.contains(recipes.next().getResult().getType()))
+				recipes.remove();
 
 		for (CustomItem cItem : Arrays.asList(
 				// EMERALD ITEM
@@ -217,25 +210,24 @@ public class Items implements Listener {
 		}
 
 		// WOOD TOOLS
-		for (String string : Arrays.asList("oak;0;oak", "spruce;1;spruce", "birch;2;birch", "jungle;3;jungle",
-				"acacia;4;acacia", "dark_oak;5;big_oak")) {
+		for (String string : Arrays.asList("oak;oak", "spruce;spruce", "birch;birch", "jungle;jungle", "acacia;acacia",
+				"dark_oak;big_oak")) {
 			String[] split = string.split(";");
+			Material craftingMaterial = Material.valueOf(split[0].toUpperCase() + "_WOOD");
 			for (DamageableItem dItem : Arrays.asList(DamageableItem.WOODEN_SWORD, DamageableItem.WOODEN_AXE,
 					DamageableItem.WOODEN_PICKAXE, DamageableItem.WOODEN_SHOVEL, DamageableItem.WOODEN_HOE)) {
-				event.addCustomItem(new WoodBasedItem(dItem, Byte.parseByte(split[1]), split[0],
-						split[2] + "_" + dItem.getTextureName(),
-						WordUtils.capitalize(split[0].replaceAll("_", " ").toLowerCase() + " "
-								+ dItem.toString().replaceAll("_", " ").toLowerCase())));
+				event.addCustomItem(new WoodBasedItem(dItem, craftingMaterial, split[0],
+						split[1] + "_" + dItem.getTextureName().replaceAll("wooden_", "wood_"),
+						WordUtils.capitalize((split[0] + " " + dItem.toString().replaceAll("_", " ")).toLowerCase())));
 			}
 			// Double Axe
-			event.addCustomItem(
-					new WoodBasedDoubleAxe(Byte.parseByte(split[1]), split[0], split[2] + "_wood_double_axe",
-							WordUtils.capitalize(split[0].replaceAll("_", " ").toLowerCase()) + " Wooden Double Axe"));
+			event.addCustomItem(new WoodBasedDoubleAxe(craftingMaterial, split[0], split[1] + "_wood_double_axe",
+					WordUtils.capitalize(split[0].replaceAll("_", " ").toLowerCase()) + " Wooden Double Axe"));
 			// Sickle
-			event.addCustomItem(new WoodBasedSickle(Byte.parseByte(split[1]), split[0], split[2] + "_wood_sickle",
+			event.addCustomItem(new WoodBasedSickle(craftingMaterial, split[0], split[1] + "_wood_sickle",
 					WordUtils.capitalize(split[0].replaceAll("_", " ").toLowerCase()) + " Wooden Sickle"));
 			// Chisel
-			event.addCustomItem(new WoodBasedChisel(Byte.parseByte(split[1]), split[0], split[2] + "_wood_chisel",
+			event.addCustomItem(new WoodBasedChisel(craftingMaterial, split[0], split[1] + "_wood_chisel",
 					WordUtils.capitalize(split[0].replaceAll("_", " ").toLowerCase()) + " Wooden Chisel"));
 		}
 
@@ -254,16 +246,16 @@ public class Items implements Listener {
 
 		// === SLABS TO FULL BLOCKS === //
 		if (recipes.contains("SLABS_TO_FULL_BLOCKS")) {
-			addHalfSlabCombo(Material.STEP, Material.STONE);
-			addHalfSlabCombo(Material.STEP, 3, Material.COBBLESTONE);
-			addHalfSlabCombo(Material.STEP, 4, Material.BRICK);
-			addHalfSlabCombo(Material.STEP, 6, Material.NETHER_BRICK);
-			addHalfSlabCombo(Material.WOOD_STEP, Material.WOOD);
-			addHalfSlabCombo(Material.WOOD_STEP, 1, Material.WOOD, 1);
-			addHalfSlabCombo(Material.WOOD_STEP, 2, Material.WOOD, 2);
-			addHalfSlabCombo(Material.WOOD_STEP, 3, Material.WOOD, 3);
-			addHalfSlabCombo(Material.WOOD_STEP, 4, Material.WOOD, 4);
-			addHalfSlabCombo(Material.WOOD_STEP, 5, Material.WOOD, 5);
+			addHalfSlabCombo(Material.STONE_SLAB, Material.STONE);
+			addHalfSlabCombo(Material.COBBLESTONE_SLAB, Material.COBBLESTONE);
+			addHalfSlabCombo(Material.BRICK_SLAB, Material.BRICK);
+			addHalfSlabCombo(Material.NETHER_BRICK_SLAB, Material.NETHER_BRICK);
+			addHalfSlabCombo(Material.OAK_SLAB, Material.OAK_PLANKS);
+			addHalfSlabCombo(Material.BIRCH_SLAB, Material.BIRCH_PLANKS);
+			addHalfSlabCombo(Material.DARK_OAK_SLAB, Material.DARK_OAK_PLANKS);
+			addHalfSlabCombo(Material.ACACIA_SLAB, Material.ACACIA_PLANKS);
+			addHalfSlabCombo(Material.SPRUCE_SLAB, Material.SPRUCE_PLANKS);
+			addHalfSlabCombo(Material.JUNGLE_SLAB, Material.JUNGLE_PLANKS);
 		}
 
 		// === CLAY CONVERSION === //
@@ -273,15 +265,15 @@ public class Items implements Listener {
 
 		// === STAIRS TO BLOCK === //
 		if (recipes.contains("STAIRS_TO_BLOCKS")) {
-			addFourMaterialsToItem(Material.WOOD_STAIRS, Material.WOOD, 2);
-			addFourMaterialsToItem(Material.SPRUCE_WOOD_STAIRS, Material.WOOD, 1, 2);
-			addFourMaterialsToItem(Material.BIRCH_WOOD_STAIRS, Material.WOOD, 2, 2);
-			addFourMaterialsToItem(Material.JUNGLE_WOOD_STAIRS, Material.WOOD, 3, 2);
-			addFourMaterialsToItem(Material.ACACIA_STAIRS, Material.WOOD, 4, 2);
-			addFourMaterialsToItem(Material.DARK_OAK_STAIRS, Material.WOOD, 5, 2);
+			addFourMaterialsToItem(Material.OAK_STAIRS, Material.OAK_PLANKS, 2);
+			addFourMaterialsToItem(Material.SPRUCE_STAIRS, Material.SPRUCE_PLANKS, 2);
+			addFourMaterialsToItem(Material.BIRCH_STAIRS, Material.BIRCH_PLANKS, 2);
+			addFourMaterialsToItem(Material.JUNGLE_STAIRS, Material.JUNGLE_PLANKS, 2);
+			addFourMaterialsToItem(Material.ACACIA_STAIRS, Material.ACACIA_PLANKS, 2);
+			addFourMaterialsToItem(Material.DARK_OAK_STAIRS, Material.DARK_OAK_PLANKS, 2);
 			addFourMaterialsToItem(Material.COBBLESTONE_STAIRS, Material.COBBLESTONE, 2);
 			addFourMaterialsToItem(Material.BRICK_STAIRS, Material.BRICK, 2);
-			addFourMaterialsToItem(Material.SMOOTH_STAIRS, Material.SMOOTH_BRICK, 2);
+			addFourMaterialsToItem(Material.STONE_BRICK_STAIRS, Material.STONE_BRICKS, 2);
 			addFourMaterialsToItem(Material.NETHER_BRICK_STAIRS, Material.NETHER_BRICK, 2);
 			addFourMaterialsToItem(Material.SANDSTONE_STAIRS, Material.SANDSTONE, 2);
 			addFourMaterialsToItem(Material.QUARTZ_STAIRS, Material.QUARTZ_BLOCK, 2);
@@ -380,81 +372,33 @@ public class Items implements Listener {
 	// === STAIRS === //
 
 	@SuppressWarnings("deprecation")
-	public static void addStair(Material input, int inputdurability, ItemStack output) {
-		ShapedRecipe ItemRecipe1 = new ShapedRecipe(output);
+	public static void addStair(Material input, Material output) {
+		ItemStack outputItem = new ItemStack(output);
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(outputItem);
 
 		ItemRecipe1.shape("100", "110", "111");
-		ItemRecipe1.setIngredient('1', input, inputdurability);
+		ItemRecipe1.setIngredient('1', input);
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 
-		ShapedRecipe ItemRecipe2 = new ShapedRecipe(output);
+		ShapedRecipe ItemRecipe2 = new ShapedRecipe(outputItem);
 
 		ItemRecipe2.shape("001", "011", "111");
-		ItemRecipe2.setIngredient('1', input, inputdurability);
+		ItemRecipe2.setIngredient('1', input);
 		Bukkit.getServer().addRecipe(ItemRecipe2);
-	}
-
-	public static void addStair(Material input, Material output) {
-		addStair(input, 0, new ItemStack(output, 1, (short) 0));
-	}
-
-	public static void addStair(Material input, int inputdurability, Material output) {
-		addStair(input, inputdurability, new ItemStack(output, 1, (short) 0));
-	}
-
-	public static void addStair(Material input, int inputdurability, Material output, int outputdurability) {
-		addStair(input, inputdurability, new ItemStack(output, 1, (short) outputdurability));
-	}
-
-	public static void addStair(Material input, Material output, int outputdurability, int outputquantity) {
-		addStair(input, 0, new ItemStack(output, outputquantity, (short) outputdurability));
-	}
-
-	public static void addStair(Material input, int inputdurability, Material output, int outputdurability,
-			int outputquantity) {
-		addStair(input, inputdurability, new ItemStack(output, outputquantity, (short) outputdurability));
-	}
-
-	public static void addStair(Material input, Material output, int outputquantity) {
-		addStair(input, 0, new ItemStack(output, outputquantity, (short) 0));
 	}
 
 	// === STAIRS TO BLOCK === //
 
 	@SuppressWarnings("deprecation")
-	public static void addFourMaterialsToItem(Material input, int inputdurability, ItemStack output) {
-		ShapedRecipe ItemRecipe1 = new ShapedRecipe(output);
+	public static void addFourMaterialsToItem(Material input, Material output, int outputAmount) {
+		ItemStack outputItem = new ItemStack(output, outputAmount);
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(outputItem);
 
 		ItemRecipe1.shape("11", "11");
-		ItemRecipe1.setIngredient('1', input, inputdurability);
+		ItemRecipe1.setIngredient('1', input);
 		Bukkit.getServer().addRecipe(ItemRecipe1);
-	}
-
-	public static void addFourMaterialsToItem(Material input, Material output) {
-		addFourMaterialsToItem(input, 0, new ItemStack(output, 1, (short) 0));
-	}
-
-	public static void addFourMaterialsToItem(Material input, int inputdurability, Material output) {
-		addFourMaterialsToItem(input, inputdurability, new ItemStack(output, 1, (short) 0));
-	}
-
-	public static void addFourMaterialsToItem(Material input, int inputdurability, Material output,
-			int outputdurability) {
-		addFourMaterialsToItem(input, inputdurability, new ItemStack(output, 1, (short) outputdurability));
-	}
-
-	public static void addFourMaterialsToItem(Material input, Material output, int outputdurability,
-			int outputquantity) {
-		addFourMaterialsToItem(input, 0, new ItemStack(output, outputquantity, (short) outputdurability));
-	}
-
-	public static void addFourMaterialsToItem(Material input, int inputdurability, Material output,
-			int outputdurability, int outputquantity) {
-		addFourMaterialsToItem(input, inputdurability, new ItemStack(output, outputquantity, (short) outputdurability));
-	}
-
-	public static void addFourMaterialsToItem(Material input, Material output, int outputquantity) {
-		addFourMaterialsToItem(input, 0, new ItemStack(output, outputquantity, (short) 0));
 	}
 
 	// === NUGGETS / SHARDS === //
@@ -465,60 +409,13 @@ public class Items implements Listener {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static void addFullTableToItem(Material input, int inputdurability, ItemStack output) {
-		ShapedRecipe ItemRecipe1 = new ShapedRecipe(output);
+	public static void addFullTableToItem(Material input, Material output, int outputAmount) {
+		ItemStack outputItem = new ItemStack(output, outputAmount);
+
+		ShapedRecipe ItemRecipe1 = new ShapedRecipe(outputItem);
 
 		ItemRecipe1.shape("111", "111", "111");
-		ItemRecipe1.setIngredient('1', input, inputdurability);
+		ItemRecipe1.setIngredient('1', input);
 		Bukkit.getServer().addRecipe(ItemRecipe1);
 	}
-
-	public static void addFullTableToItem(Material input, Material output) {
-		addFullTableToItem(input, 0, new ItemStack(output, 1, (short) 0));
-	}
-
-	public static void addFullTableToItem(Material input, int inputdurability, Material output) {
-		addFullTableToItem(input, inputdurability, new ItemStack(output, 1, (short) 0));
-	}
-
-	public static void addFullTableToItem(Material input, int inputdurability, Material output, int outputdurability) {
-		addFullTableToItem(input, inputdurability, new ItemStack(output, 1, (short) outputdurability));
-	}
-
-	public static void addFullTableToItem(Material input, Material output, int outputdurability, int outputquantity) {
-		addFullTableToItem(input, 0, new ItemStack(output, outputquantity, (short) outputdurability));
-	}
-
-	public static void addFullTableToItem(Material input, int inputdurability, Material output, int outputdurability,
-			int outputquantity) {
-		addFullTableToItem(input, inputdurability, new ItemStack(output, outputquantity, (short) outputdurability));
-	}
-
-	public static void addFullTableToItem(Material input, Material output, int outputquantity) {
-		addFullTableToItem(input, 0, new ItemStack(output, outputquantity, (short) 0));
-	}
-
-	public static void addFullTableToItem(ItemStack input, ItemStack output) {
-		addFullTableToItem(input.getType(), input.getDurability(), output);
-	}
-
-	public static void addFullTableToItem(ItemStack input, Material output) {
-		addFullTableToItem(input.getType(), input.getDurability(), new ItemStack(output, 1, (short) 0));
-	}
-
-	public static void addFullTableToItem(ItemStack input, Material output, int outputquantity) {
-		addFullTableToItem(input.getType(), input.getDurability(), new ItemStack(output, outputquantity, (short) 0));
-	}
-
-	//@EventHandler
-	//public void onChat(PlayerChatEvent event) {
-	//	int noOfItemsToIgnore = Integer.parseInt(event.getMessage());
-	//	int itemRN = 0;
-	//	for (CustomItemStack cStack : AdditionsAPI.getAllCustomItemStacks()) {
-	//		if (noOfItemsToIgnore <= itemRN)
-	//		event.getPlayer().getInventory().addItem(cStack.getItemStack());
-	//		itemRN++;
-	//	}
-	//}
-
 }

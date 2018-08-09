@@ -10,10 +10,10 @@ import us.fihgu.toolbox.item.DamageableItem;
 
 public class WoodBasedDoubleAxe extends WoodBasedItem implements DoubleAxeAbilities {
 
-	public WoodBasedDoubleAxe(byte materialData, String woodType, String textureName, String displayName) {
-		super(DamageableItem.WOODEN_AXE, materialData, woodType, textureName, displayName, "wooden_double_axe");
+	public WoodBasedDoubleAxe(Material material, String woodType, String textureName, String displayName) {
+		super(DamageableItem.WOODEN_AXE, woodType, textureName, displayName, "wooden_double_axe");
 		
-		modifyCustomItem(this, new RecipeIngredient(Material.WOOD, materialData));
+		modifyCustomItem(this, new RecipeIngredient(material));
 	}
 
 }

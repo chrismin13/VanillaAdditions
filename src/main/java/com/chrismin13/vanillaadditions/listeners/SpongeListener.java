@@ -16,7 +16,6 @@ import com.chrismin13.vanillaadditions.Items;
 
 public class SpongeListener implements Listener {
 
-	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onBlockPlace(BlockPlaceEvent event) {
 		if (event.isCancelled())
@@ -29,12 +28,11 @@ public class SpongeListener implements Listener {
 		Block block = event.getBlock();
 		Material type = block.getType();
 		Biome biome = block.getBiome();
-		Byte durability = block.getData();
 		// In Nether
-		if (biome == Biome.HELL) {
+		if (biome == Biome.NETHER) {
 			// Wet Sponge to Sponge
-			if (mechanics.contains("WET_SPONGE_TO_SPONGE") && type == Material.SPONGE && durability == (byte) 1) {
-				block.setData((byte) 0, true);
+			if (mechanics.contains("WET_SPONGE_TO_SPONGE") && type == Material.WET_SPONGE) {
+				block.setType(Material.SPONGE);
 				Location l = block.getLocation();
 				block.getWorld().spawnParticle(Particle.SMOKE_LARGE, l.getX() - 0.5D, l.getY() + 0.5, l.getZ() + 0.5D,
 						10);

@@ -18,10 +18,9 @@ import com.chrismin13.vanillaadditions.utils.BlockUtils;
 
 public interface SickleAbilities {
 
-	@SuppressWarnings("deprecation")
 	default void onUse(CustomItemStack cStack, Block block, Player player) {
-		int m = block.getTypeId();
-		if (m == 59 || m == 141 || m == 142 || m == 207) {
+		Material m = block.getType();
+		if (m == Material.WHEAT || m == Material.CARROTS || m == Material.POTATOES || m == Material.BEETROOTS) {
 			player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_ATTACK_SWEEP, 1.0F, 1.0F);
 			List<Block> blocks = BlockUtils.getSquareRadius(block, getBreakRadius());
 
@@ -29,13 +28,14 @@ public interface SickleAbilities {
 			World world = block.getWorld();
 
 			for (Block b : blocks) {
-				int material = b.getTypeId();
-				if (material == 59 || material == 141 || material == 142 || material == 207) {
+				Material material = b.getType();
+				if (material == Material.WHEAT || material == Material.CARROTS || material == Material.POTATOES
+						|| material == Material.BEETROOTS) {
 					delay++;
 					cStack.reduceDurability(player,
 							cStack.getCustomItem().getDurabilityMechanics().getBlockBreak(block));
 					Bukkit.getScheduler().scheduleSyncDelayedTask(VanillaAdditions.getInstance(), () -> {
-						if (b.getTypeId() == material) {
+						if (b.getType() == material) {
 							b.breakNaturally();
 							// if (useParticleLIB)
 							// ParticleEffect.BLOCK_CRACK.sendData(players,

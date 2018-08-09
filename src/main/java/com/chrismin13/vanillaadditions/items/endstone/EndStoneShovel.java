@@ -9,7 +9,7 @@ public class EndStoneShovel extends EndStoneItem {
 	public EndStoneShovel() {
 		super(DamageableItem.STONE_SHOVEL, "vanilla_additions:end_stone_shovel", "End Stone Shovel", "end_stone_shovel");
 
-		addAllCustomRecipes(getToolType().getCustomShapedRecipe(Material.ENDER_STONE, Material.STICK));
+		addAllCustomRecipes(getToolType().getCustomShapedRecipe(Material.END_STONE, Material.STICK));
 	}
 
 }

@@ -35,6 +35,7 @@ public class EnderBowListener implements Listener {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onArrowPickup(PlayerPickupArrowEvent event) {
 		if (!event.isCancelled() && unpickableArrows.contains(event.getArrow()))

@@ -1,8 +1,9 @@
 package com.chrismin13.vanillaadditions.abilities;
 
 import org.bukkit.Material;
-import org.bukkit.SandstoneType;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.Directional;
 
 import com.chrismin13.additionsapi.items.CustomTool;
 import com.chrismin13.additionsapi.permissions.ItemPermissions;
@@ -12,56 +13,52 @@ import com.chrismin13.vanillaadditions.permissions.ChiselPermissions;
 
 public interface ChiselAbilities {
 
-	@SuppressWarnings("deprecation")
-	default void convertToChiseled(Block block) {
+	default boolean convertToChiseled(Block block) {
 		Material type = block.getType();
-		byte data = block.getData();
 		if (type == Material.SANDSTONE) {
-			if (data == (byte) 0) {
-				block.setTypeIdAndData(Material.SANDSTONE.getId(), SandstoneType.GLYPHED.getData(), true);
-			} else if (data == SandstoneType.GLYPHED.getData()) {
-				block.setTypeIdAndData(Material.SANDSTONE.getId(), (byte) 0, true);
-			}
-		} else if (type == Material.MONSTER_EGGS) {
-			if (data == (byte) 2) {
-				block.setTypeIdAndData(Material.MONSTER_EGGS.getId(), (byte) 5, true);
-			} else if (data == (byte) 5) {
-				block.setTypeIdAndData(Material.MONSTER_EGGS.getId(), (byte) 2, true);
-			}
-		} else if (type == Material.SMOOTH_BRICK) {
-			if (data == (byte) 0) {
-				block.setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) 3, true);
-			} else if (data == (byte) 3) {
-				block.setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) 0, true);
-			}
+			block.setType(Material.CHISELED_SANDSTONE);
+		} else if (type == Material.CHISELED_SANDSTONE) {
+			block.setType(Material.SANDSTONE);
+		} else if (type == Material.INFESTED_STONE_BRICKS) {
+			block.setType(Material.INFESTED_CHISELED_STONE_BRICKS);
+		} else if (type == Material.INFESTED_CHISELED_STONE_BRICKS) {
+			block.setType(Material.INFESTED_STONE_BRICKS);
+		} else if (type == Material.STONE_BRICKS) {
+			block.setType(Material.CHISELED_STONE_BRICKS);
+		} else if (type == Material.CHISELED_STONE_BRICKS) {
+			block.setType(Material.STONE_BRICKS);
 		} else if (type == Material.QUARTZ_BLOCK) {
-			if (data == (byte) 0) {
-				block.setTypeIdAndData(Material.QUARTZ_BLOCK.getId(), (byte) 1, true);
-			} else if (data == (byte) 1) {
-				block.setTypeIdAndData(Material.QUARTZ_BLOCK.getId(), (byte) 0, true);
-			}
+			block.setType(Material.CHISELED_QUARTZ_BLOCK);
+		} else if (type == Material.CHISELED_QUARTZ_BLOCK) {
+			block.setType(Material.QUARTZ_BLOCK);
 		} else if (type == Material.RED_SANDSTONE) {
-			if (data == (byte) 0) {
-				block.setTypeIdAndData(Material.RED_SANDSTONE.getId(), (byte) 1, true);
-			} else if (data == (byte) 1) {
-				block.setTypeIdAndData(Material.RED_SANDSTONE.getId(), (byte) 0, true);
+			block.setType(Material.CHISELED_RED_SANDSTONE);
+		} else if (type == Material.CHISELED_RED_SANDSTONE) {
+			block.setType(Material.RED_SANDSTONE);
+		} else if (block.getBlockData() instanceof Directional) {
+			Directional data = (Directional) block.getBlockData();
+			BlockFace[] faces = (BlockFace[]) data.getFaces().toArray();
+			int facesSize = faces.length;
+			BlockFace face = data.getFacing();
+			int currentFace = 0;
+
+			for (BlockFace faceFromSet : faces) {
+				if (faceFromSet.equals(face)) {
+					break;
+				}
+				currentFace++;
 			}
-		} else if (type.toString().endsWith("GLAZED_TERRACOTTA")) {
-			if (data < (byte) 3)
-				block.setData((byte) (data + 1));
-			else
-				block.setData((byte) 0);
-		} else if (type.equals(Material.HUGE_MUSHROOM_1) || type
-				.equals(Material.HUGE_MUSHROOM_2)) {
-			if (data < (byte) 10)
-				block.setData((byte) (data + 1));
-			else if (data < (byte) 14)
-				block.setData((byte) 14);
-			else if (data < (byte) 15)
-				block.setData((byte) 15);
-			else
-				block.setData((byte) 0);
+
+			if (currentFace < facesSize) {
+				data.setFacing(faces[currentFace + 1]);
+			} else {
+				data.setFacing(faces[0]);
+			}
+			block.setBlockData(data);
+		} else {
+			return false;
 		}
+		return true;
 	}
 
 	default void modifyCustomItem(CustomTool cTool, Material craftingMaterial) {

@@ -29,7 +29,6 @@ import com.chrismin13.vanillaadditions.items.netherrack.NetherrackShovel;
 
 public class NetherrackItemsListener implements Listener {
 
-	@SuppressWarnings("deprecation")
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onRightClickBlock(PlayerInteractEvent event) {
 		if (event.isCancelled() || !event.getAction().equals(Action.RIGHT_CLICK_BLOCK))
@@ -52,14 +51,13 @@ public class NetherrackItemsListener implements Listener {
 			return;
 
 		Material materialClicked = blockClicked.getType();
-		Byte dataClicked = blockClicked.getData();
 		if (face == BlockFace.UP || face == BlockFace.EAST || face == BlockFace.NORTH || face == BlockFace.SOUTH
 				|| face == BlockFace.WEST) {
 			if (cItem instanceof NetherrackShovel && materialClicked == Material.GRASS) {
 				return;
 			} else if (cItem instanceof NetherrackHoe
 					&& (materialClicked == Material.GRASS || materialClicked == Material.GRASS_PATH
-							|| (materialClicked == Material.DIRT && dataClicked != (byte) 2))) {
+							|| (materialClicked == Material.PODZOL))) {
 				return;
 			}
 		}
@@ -69,7 +67,6 @@ public class NetherrackItemsListener implements Listener {
 		Bukkit.getPluginManager().callEvent(cEvent);
 		if (!cEvent.isCancelled()) {
 			blockAir.setType(Material.FIRE);
-			blockAir.setData((byte) 0);
 			player.playSound(blockAir.getLocation(), Sound.ITEM_FLINTANDSTEEL_USE, 1F, 1F);
 			cStack.reduceDurability(player, 1);
 		}

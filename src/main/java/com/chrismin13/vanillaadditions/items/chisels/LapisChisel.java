@@ -12,7 +12,7 @@ public class LapisChisel extends LapisItem implements ChiselAbilities {
 
 	public LapisChisel() {
 		super(DamageableItem.IRON_PICKAXE, "vanilla_additions:lapis_chisel", "Lapis Chisel", "lapis_chisel");
-		modifyCustomItem(this, new RecipeIngredient(Material.INK_SACK, (byte) 4));
+		modifyCustomItem(this, new RecipeIngredient(Material.LAPIS_LAZULI));
 	}
 
 }

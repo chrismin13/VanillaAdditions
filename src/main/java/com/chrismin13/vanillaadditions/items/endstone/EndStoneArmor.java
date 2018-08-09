@@ -13,7 +13,7 @@ public class EndStoneArmor extends AverageLeatherArmor implements StoneArmorAbil
 	public EndStoneArmor(ArmorType armorType) {
 		super(armorType, armorType.getIronMaterial().getMaxDurability(),
 				"vanilla_additions:end_stone_" + armorType.toString().toLowerCase(),
-				"End Stone " + armorType.toIngameString(), Color.fromRGB(237, 237, 154), Material.ENDER_STONE,
+				"End Stone " + armorType.toIngameString(), Color.fromRGB(237, 237, 154), Material.END_STONE,
 				MaterialUtils.getBaseArmor(armorType.getChainmailMaterial()),
 				MaterialUtils.getBaseArmorToughness(armorType.getChainmailMaterial()));
 		modifyCustomItem(this);

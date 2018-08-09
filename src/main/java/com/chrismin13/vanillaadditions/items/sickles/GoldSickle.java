@@ -7,7 +7,7 @@ import us.fihgu.toolbox.item.DamageableItem;
 public class GoldSickle extends AverageSickle {
 
 	public GoldSickle() {
-		super(DamageableItem.GOLDEN_HOE, Material.GOLD_HOE.getMaxDurability(), "vanilla_additions:golden_sickle",
+		super(DamageableItem.GOLDEN_HOE, Material.GOLDEN_HOE.getMaxDurability(), "vanilla_additions:golden_sickle",
 				"Golden Sickle", "gold_sickle", Material.GOLD_INGOT);
 	}
 
