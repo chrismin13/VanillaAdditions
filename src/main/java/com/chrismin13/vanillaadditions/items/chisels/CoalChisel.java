@@ -17,12 +17,12 @@ public class CoalChisel extends CoalItem implements ChiselAbilities {
 
 	@Override
 	public int getCoalAmount() {
-		return 5;
+		return 1;
 	}
 
 	@Override
 	public int getStickAmount() {
-		return 2;
+		return 1;
 	}
 
 }
