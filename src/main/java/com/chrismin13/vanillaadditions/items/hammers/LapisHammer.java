@@ -12,7 +12,7 @@ public class LapisHammer extends LapisItem implements HammerAbilities {
 
 	public LapisHammer() {
 		super(DamageableItem.IRON_PICKAXE, "vanilla_additions:lapis_hammer", "Lapis Hammer", "lapis_hammer");
-		modifyCustomItem(this, new RecipeIngredient(Material.INK_SACK, (byte) 4));
+		modifyCustomItem(this, new RecipeIngredient(Material.LAPIS_LAZULI));
 	}
 
 }

@@ -12,7 +12,7 @@ public class EndStoneHammer extends EndStoneItem implements HammerAbilities {
 	public EndStoneHammer() {
 		super(DamageableItem.STONE_PICKAXE, "vanilla_additions:end_stone_hammer", "End Stone Hammer",
 				"end_stone_hammer");
-		modifyCustomItem(this, Material.ENDER_STONE);
+		modifyCustomItem(this, Material.END_STONE);
 	}
 
 }

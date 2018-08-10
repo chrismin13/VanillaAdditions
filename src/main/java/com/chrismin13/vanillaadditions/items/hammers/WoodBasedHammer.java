@@ -10,10 +10,10 @@ import us.fihgu.toolbox.item.DamageableItem;
 
 public class WoodBasedHammer extends WoodBasedItem implements HammerAbilities {
 
-	public WoodBasedHammer(byte materialData, String woodType, String textureName, String displayName) {
-		super(DamageableItem.WOODEN_PICKAXE, materialData, woodType, textureName, displayName, "wooden_hammer");
+	public WoodBasedHammer(Material material, String woodType, String textureName, String displayName) {
+		super(DamageableItem.WOODEN_PICKAXE, woodType, textureName, displayName, "wooden_hammer");
 		
-		modifyCustomItem(this, new RecipeIngredient(Material.WOOD, materialData));
+		modifyCustomItem(this, new RecipeIngredient(material));
 	}
 
 }
