@@ -156,9 +156,15 @@ public class Items implements Listener {
 		List<Material> coincidingMaterials = Arrays.asList(Material.WOODEN_SWORD, Material.WOODEN_AXE,
 				Material.WOODEN_PICKAXE, Material.WOODEN_SHOVEL, Material.WOODEN_HOE);
 		Iterator<Recipe> recipes = Bukkit.recipeIterator();
-		while (recipes.hasNext())
-			if (coincidingMaterials.contains(recipes.next().getResult().getType()))
-				recipes.remove();
+		while (recipes.hasNext()) {
+			Recipe recipe = recipes.next();
+			if (recipe instanceof ShapedRecipe) {
+				ShapedRecipe shaped = (ShapedRecipe) recipe;
+				if (coincidingMaterials.contains(shaped.getResult().getType())
+						&& shaped.getKey().getNamespace().equals("minecraft"))
+					recipes.remove();
+			}
+		}
 
 		for (CustomItem cItem : Arrays.asList(
 				// EMERALD ITEM
@@ -232,7 +238,7 @@ public class Items implements Listener {
 		for (String string : Arrays.asList("oak;oak", "spruce;spruce", "birch;birch", "jungle;jungle", "acacia;acacia",
 				"dark_oak;big_oak")) {
 			String[] split = string.split(";");
-			Material craftingMaterial = Material.valueOf(split[0].toUpperCase() + "_WOOD");
+			Material craftingMaterial = Material.valueOf(split[0].toUpperCase() + "_PLANKS");
 			for (DamageableItem dItem : Arrays.asList(DamageableItem.WOODEN_SWORD, DamageableItem.WOODEN_AXE,
 					DamageableItem.WOODEN_PICKAXE, DamageableItem.WOODEN_SHOVEL, DamageableItem.WOODEN_HOE)) {
 				event.addCustomItem(new WoodBasedItem(dItem, craftingMaterial, split[0],
