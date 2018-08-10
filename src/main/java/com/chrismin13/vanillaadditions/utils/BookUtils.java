@@ -22,8 +22,11 @@ public class BookUtils {
             Constructor<?> serializerConstructor = NMSUtils.getNMSClass("PacketDataSerializer").getConstructor(ByteBuf.class);
             Object packetDataSerializer = serializerConstructor.newInstance(buf);
 
-            Constructor<?> titleConstructor = NMSUtils.getNMSClass("PacketPlayOutCustomPayload").getConstructor(String.class, NMSUtils.getNMSClass("PacketDataSerializer"));
-            Object payload = titleConstructor.newInstance("MC|BOpen", packetDataSerializer);
+            Constructor<?> keyConstructor = NMSUtils.getNMSClass("MinecraftKey").getConstructor(String.class);
+            Object bookKey = keyConstructor.newInstance("minecraft:book_open");
+            
+            Constructor<?> titleConstructor = NMSUtils.getNMSClass("PacketPlayOutCustomPayload").getConstructor(bookKey.getClass(), NMSUtils.getNMSClass("PacketDataSerializer"));
+            Object payload = titleConstructor.newInstance(bookKey, packetDataSerializer);
 
             NMSUtils.sendPacket(p, payload);
         } catch (Exception e) {
