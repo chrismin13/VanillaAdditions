@@ -6,7 +6,7 @@
 
     <groupId>com.chrismin13</groupId>
     <artifactId>VanillaAdditions</artifactId>
-    <version>1.2.9-SNAPSHOT</version>
+    <version>1.3-SNAPSHOT</version>
     <build>
         <plugins>
 

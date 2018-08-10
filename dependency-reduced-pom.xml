@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.chrismin13</groupId>
   <artifactId>VanillaAdditions</artifactId>
-  <version>1.2.9-SNAPSHOT</version>
+  <version>1.3-SNAPSHOT</version>
   <build>
     <plugins>
       <plugin>
@@ -50,9 +50,9 @@
     <dependency>
       <groupId>AdditionsAPI</groupId>
       <artifactId>com.chrismin13</artifactId>
-      <version>1.2.8</version>
+      <version>latest</version>
       <scope>system</scope>
-      <systemPath>C:/Users/chris/OneDrive/Eclipse Workspace/Test Server/plugins/AdditionsAPI-1.2.8-SNAPSHOT-shaded.jar</systemPath>
+      <systemPath>C:/Users/chris/OneDrive/Eclipse Workspace/Test Server/plugins/AdditionsAPI.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>Spigot</groupId>

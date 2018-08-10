@@ -74,6 +74,21 @@ import com.chrismin13.vanillaadditions.items.endstone.EndStoneHoe;
 import com.chrismin13.vanillaadditions.items.endstone.EndStonePickaxe;
 import com.chrismin13.vanillaadditions.items.endstone.EndStoneShovel;
 import com.chrismin13.vanillaadditions.items.endstone.EndStoneSword;
+import com.chrismin13.vanillaadditions.items.hammers.ClayHammer;
+import com.chrismin13.vanillaadditions.items.hammers.CoalHammer;
+import com.chrismin13.vanillaadditions.items.hammers.DiamondHammer;
+import com.chrismin13.vanillaadditions.items.hammers.EmeraldHammer;
+import com.chrismin13.vanillaadditions.items.hammers.EndStoneHammer;
+import com.chrismin13.vanillaadditions.items.hammers.GoldHammer;
+import com.chrismin13.vanillaadditions.items.hammers.IronHammer;
+import com.chrismin13.vanillaadditions.items.hammers.LapisHammer;
+import com.chrismin13.vanillaadditions.items.hammers.NetherrackHammer;
+import com.chrismin13.vanillaadditions.items.hammers.ObsidianHammer;
+import com.chrismin13.vanillaadditions.items.hammers.PrismarineHammer;
+import com.chrismin13.vanillaadditions.items.hammers.RedstoneHammer;
+import com.chrismin13.vanillaadditions.items.hammers.SlimeHammer;
+import com.chrismin13.vanillaadditions.items.hammers.StoneHammer;
+import com.chrismin13.vanillaadditions.items.hammers.WoodBasedHammer;
 import com.chrismin13.vanillaadditions.items.lapis.LapisArmor;
 import com.chrismin13.vanillaadditions.items.lapis.LapisAxe;
 import com.chrismin13.vanillaadditions.items.lapis.LapisHoe;
@@ -136,7 +151,7 @@ public class Items implements Listener {
 
 	@EventHandler
 	public void onInitialization(AdditionsAPIInitializationEvent event) {
-		event.addResourcePackFromPlugin(VanillaAdditions.getInstance(), "VanillaAdditions-1.1.zip");
+		event.addResourcePackFromPlugin(VanillaAdditions.getInstance(), "VanillaAdditions-1.2.zip");
 
 		String version = Bukkit.getServer().getVersion();
 
@@ -155,40 +170,44 @@ public class Items implements Listener {
 		for (CustomItem cItem : Arrays.asList(
 				// EMERALD ITEM
 				new EmeraldSword(), new EmeraldAxe(), new EmeraldPickaxe(), new EmeraldShovel(), new EmeraldHoe(),
-				new EmeraldDoubleAxe(), new EmeraldSickle(), new EmeraldChisel(),
+				new EmeraldDoubleAxe(), new EmeraldSickle(), new EmeraldChisel(), new EmeraldHammer(),
 				// OBSIDIAN ITEM
 				new ObsidianSword(), new ObsidianAxe(), new ObsidianPickaxe(), new ObsidianShovel(), new ObsidianHoe(),
-				new ObsidianDoubleAxe(), new ObsidianSickle(), new ObsidianChisel(),
+				new ObsidianDoubleAxe(), new ObsidianSickle(), new ObsidianChisel(), new ObsidianHammer(),
 				// END STONE ITEMS
 				new EndStoneSword(), new EndStoneAxe(), new EndStonePickaxe(), new EndStoneShovel(), new EndStoneHoe(),
-				new EndStoneDoubleAxe(), new EndStoneSickle(), new EndStoneChisel(),
+				new EndStoneDoubleAxe(), new EndStoneSickle(), new EndStoneChisel(), new EndStoneHammer(),
 				// NETHERRACK ITEMS
 				new NetherrackSword(), new NetherrackAxe(), new NetherrackPickaxe(), new NetherrackShovel(),
 				new NetherrackHoe(), new NetherrackDoubleAxe(), new NetherrackSickle(), new NetherrackChisel(),
+				new NetherrackHammer(),
 				// COAL ITEMS
 				new CoalSword(), new CoalAxe(), new CoalPickaxe(), new CoalShovel(), new CoalHoe(), new CoalDoubleAxe(),
-				new CoalSickle(), new CoalChisel(),
+				new CoalSickle(), new CoalChisel(), new CoalHammer(),
 				// LAPIS ITEMS
 				new LapisSword(), new LapisAxe(), new LapisPickaxe(), new LapisShovel(), new LapisHoe(),
-				new LapisDoubleAxe(), new LapisSickle(), new LapisChisel(),
+				new LapisDoubleAxe(), new LapisSickle(), new LapisChisel(), new LapisHammer(),
 				// REDSTONE ITEMS
 				new RedstoneSword(), new RedstoneAxe(), new RedstonePickaxe(), new RedstoneShovel(), new RedstoneHoe(),
-				new RedstoneDoubleAxe(), new RedstoneSickle(), new RedstoneChisel(),
+				new RedstoneDoubleAxe(), new RedstoneSickle(), new RedstoneChisel(), new RedstoneHammer(),
 				// PRISMARINE ITEMS
 				new PrismarineSword(), new PrismarineAxe(), new PrismarinePickaxe(), new PrismarineShovel(),
 				new PrismarineHoe(), new PrismarineDoubleAxe(), new PrismarineSickle(), new PrismarineChisel(),
+				new PrismarineHammer(),
 				// CLAY ITEMS
 				new ClaySword(), new ClayAxe(), new ClayPickaxe(), new ClayShovel(), new ClayHoe(), new ClayDoubleAxe(),
-				new ClaySickle(), new ClayChisel(),
+				new ClaySickle(), new ClayChisel(), new ClayHammer(),
 				// SLIME ITEMS
 				new SlimeSword(), new SlimeAxe(), new SlimePickaxe(), new SlimeShovel(), new SlimeHoe(),
-				new SlimeDoubleAxe(), new SlimeSickle(), new SlimeChisel(),
+				new SlimeDoubleAxe(), new SlimeSickle(), new SlimeChisel(), new SlimeHammer(),
 				// DOUBLE AXES
 				new StoneDoubleAxe(), new IronDoubleAxe(), new GoldDoubleAxe(), new DiamondDoubleAxe(),
 				// SICKLES
 				new StoneSickle(), new IronSickle(), new GoldSickle(), new DiamondSickle(),
 				// CHISELS
-				new StoneChisel(), new IronChisel(), new GoldChisel(), new DiamondChisel()))
+				new StoneChisel(), new IronChisel(), new GoldChisel(), new DiamondChisel(),
+				// HAMMERS
+				new StoneHammer(), new IronHammer(), new GoldHammer(), new DiamondHammer()))
 			event.addCustomItem(cItem);
 
 		for (ArmorType armorType : ArmorType.values()) {
@@ -237,6 +256,9 @@ public class Items implements Listener {
 			// Chisel
 			event.addCustomItem(new WoodBasedChisel(Byte.parseByte(split[1]), split[0], split[2] + "_wood_chisel",
 					WordUtils.capitalize(split[0].replaceAll("_", " ").toLowerCase()) + " Wooden Chisel"));
+			// Hammer
+			event.addCustomItem(new WoodBasedHammer(Byte.parseByte(split[1]), split[0], split[2] + "_wood_hammer",
+					WordUtils.capitalize(split[0].replaceAll("_", " ").toLowerCase()) + " Wooden Hammer"));
 		}
 
 		// ENDER BOW
@@ -510,15 +532,15 @@ public class Items implements Listener {
 		addFullTableToItem(input.getType(), input.getDurability(), new ItemStack(output, outputquantity, (short) 0));
 	}
 
-	//@EventHandler
-	//public void onChat(PlayerChatEvent event) {
-	//	int noOfItemsToIgnore = Integer.parseInt(event.getMessage());
-	//	int itemRN = 0;
-	//	for (CustomItemStack cStack : AdditionsAPI.getAllCustomItemStacks()) {
-	//		if (noOfItemsToIgnore <= itemRN)
-	//		event.getPlayer().getInventory().addItem(cStack.getItemStack());
-	//		itemRN++;
-	//	}
-	//}
+	// @EventHandler
+	// public void onChat(PlayerChatEvent event) {
+	// int noOfItemsToIgnore = Integer.parseInt(event.getMessage());
+	// int itemRN = 0;
+	// for (CustomItemStack cStack : AdditionsAPI.getAllCustomItemStacks()) {
+	// if (noOfItemsToIgnore <= itemRN)
+	// event.getPlayer().getInventory().addItem(cStack.getItemStack());
+	// itemRN++;
+	// }
+	// }
 
 }
