@@ -13,7 +13,7 @@ public class SlimeChisel extends SlimeItem implements ChiselAbilities {
 	public SlimeChisel() {
 		super(DamageableItem.WOODEN_PICKAXE, "vanilla_additions:slime_chisel", "Slime Chisel",
 				"slime_chisel");
-		addCustomRecipe(getRecipe(new RecipeIngredient(Material.SLIME_BALL), new RecipeIngredient(Material.STICK)));
+		modifyCustomItem(this, Material.SLIME_BALL);
 	}
 
 }

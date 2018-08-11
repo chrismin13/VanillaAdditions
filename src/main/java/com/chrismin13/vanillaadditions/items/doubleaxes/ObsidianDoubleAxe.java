@@ -15,12 +15,7 @@ public class ObsidianDoubleAxe extends ObsidianItem implements DoubleAxeAbilitie
 	public ObsidianDoubleAxe() {
 		super(DamageableItem.IRON_AXE, "vanilla_additions:obsidian_double_axe", "Obsidian Double Axe",
 				"obsidian_double_axe");
-		addCustomRecipe(getRecipe(new RecipeIngredient(Material.OBSIDIAN), new RecipeIngredient(Material.STICK)));
-		for (Attribute attribute : getAttributes()) {
-			if (attribute.getAttributeType().equals(AttributeType.GENERIC_ATTACK_SPEED)) {
-				attribute.setAmount(getAttackSpeed(getMaterial()) - 4D);
-			}
-		}
+		modifyCustomItem(this, Material.OBSIDIAN);
 	}
 
 }

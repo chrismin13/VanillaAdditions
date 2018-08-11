@@ -314,9 +314,6 @@ public class TreeFeller {
 							TreeFeller.popLeaves(currentBlock, null, player);
 						}
 					}
-					cStack.reduceDurability(player,
-							cStack.getCustomItem().getDurabilityMechanics().getBlockBreak(currentBlock));
-					world.playSound(currentBlock.getLocation(), Sound.BLOCK_WOOD_BREAK, 1.0F, 1.0F);
 					// if (useParticleLIB)
 					// ParticleEffect.BLOCK_CRACK.sendData(players, (double)
 					// currentBlock.getX(),
@@ -352,8 +349,6 @@ public class TreeFeller {
 										target.breakNaturally(item);
 									else
 										target.breakNaturally();
-								target.getWorld().playSound(target.getLocation(), Sound.BLOCK_GRASS_BREAK, 0.125F,
-										1.0F);
 								// if (useParticleLIB)
 								// ParticleEffect.BLOCK_CRACK.sendData(players,
 								// (double) target.getX(),
