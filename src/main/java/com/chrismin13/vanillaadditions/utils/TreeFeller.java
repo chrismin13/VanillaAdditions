@@ -10,11 +10,13 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.chrismin13.additionsapi.items.CustomItemStack;
 import com.chrismin13.vanillaadditions.VanillaAdditions;
+import com.chrismin13.vanillaadditions.listeners.BlockBreakListener;
 
 public class TreeFeller {
 
@@ -254,12 +256,19 @@ public class TreeFeller {
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 				@Override
 				public void run() {
-					if (cStack.getItemStack() != null) {
-						currentBlock.breakNaturally(cStack.getItemStack());
-						TreeFeller.popLeaves(currentBlock, cStack.getItemStack());
-					} else {
-						currentBlock.breakNaturally();
-						TreeFeller.popLeaves(currentBlock, null);
+					BlockBreakListener.blocksBeingBroken.add(currentBlock);
+					BlockBreakEvent newEvent = new BlockBreakEvent(currentBlock, player);
+
+					Bukkit.getPluginManager().callEvent(newEvent);
+					BlockBreakListener.blocksBeingBroken.remove(currentBlock);
+					if (!newEvent.isCancelled()) {
+						if (cStack.getItemStack() != null) {
+							currentBlock.breakNaturally(cStack.getItemStack());
+							TreeFeller.popLeaves(currentBlock, cStack.getItemStack(), player);
+						} else {
+							currentBlock.breakNaturally();
+							TreeFeller.popLeaves(currentBlock, null, player);
+						}
 					}
 					cStack.reduceDurability(player,
 							cStack.getCustomItem().getDurabilityMechanics().getBlockBreak(currentBlock));
@@ -275,7 +284,7 @@ public class TreeFeller {
 		}
 	}
 
-	public static void popLeaves(Block block, final ItemStack item) {
+	public static void popLeaves(Block block, final ItemStack item, Player player) {
 		Long delay = 0L;
 		// final Collection<? extends Player> players =
 		// Bukkit.getOnlinePlayers();
@@ -289,12 +298,19 @@ public class TreeFeller {
 							// @SuppressWarnings("deprecation")
 							@Override
 							public void run() {
-								if (item != null)
-									target.breakNaturally(item);
-								else
-									target.breakNaturally();
-								target.getWorld().playSound(target.getLocation(), Sound.BLOCK_GRASS_BREAK, 0.125F,
-										1.0F);
+								BlockBreakListener.blocksBeingBroken.add(target);
+								BlockBreakEvent newEvent = new BlockBreakEvent(target, player);
+
+								Bukkit.getPluginManager().callEvent(newEvent);
+								BlockBreakListener.blocksBeingBroken.remove(target);
+								if (!newEvent.isCancelled()) {
+									if (item != null)
+										target.breakNaturally(item);
+									else
+										target.breakNaturally();
+									target.getWorld().playSound(target.getLocation(), Sound.BLOCK_GRASS_BREAK, 0.125F,
+											1.0F);
+								}
 								// if (useParticleLIB)
 								// ParticleEffect.BLOCK_CRACK.sendData(players,
 								// (double) target.getX(),
