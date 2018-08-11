@@ -43,7 +43,7 @@ public class BlockBreakListener implements Listener {
 				&& (block.getType().equals(Material.LOG) || block.getType().equals(Material.LOG_2))) {
 			((DoubleAxeAbilities) cItem).chopTree(player, block, cStack);
 		} else if (cItem instanceof SickleAbilities) {
-			((SickleAbilities) cItem).onUse(cStack, block, player);
+			((SickleAbilities) cItem).onUse(breakEvent, cStack, block, player);
 		} else if (cItem instanceof HammerAbilities && lastBlockFace.get(uuid) != null) {
 			((HammerAbilities) cItem).onUse(block, lastBlockFace.get(uuid), cStack, player);
 		}
