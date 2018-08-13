@@ -33,7 +33,6 @@ public interface SickleAbilities {
 
 		Bukkit.getScheduler().scheduleSyncDelayedTask(VanillaAdditions.getInstance(), () -> {
 			block.setType(material);
-			block.setData((byte) 0);
 		});
 
 		Long delay = 0L;
@@ -55,11 +54,11 @@ public interface SickleAbilities {
 
 	default boolean isBreakable(Material material) {
 		switch (material) {
-		case CROPS:
-		case POTATO:
-		case CARROT:
-		case BEETROOT_BLOCK:
-		case NETHER_WARTS:
+		case WHEAT:
+		case POTATOES:
+		case CARROTS:
+		case BEETROOTS:
+		case NETHER_WART:
 			return true;
 		default:
 			return false;

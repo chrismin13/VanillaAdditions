@@ -1,6 +1,5 @@
 package com.chrismin13.vanillaadditions.listeners;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -42,7 +41,8 @@ public class BlockBreakListener implements Listener {
 			return;
 		if (cItem instanceof DoubleAxeAbilities && (material.equals(Material.ACACIA_LOG)
 				|| material.equals(Material.BIRCH_LOG) || material.equals(Material.DARK_OAK_LOG)
-				|| material.equals(Material.JUNGLE_LOG) || material.equals(Material.SPRUCE_LOG))) {
+				|| material.equals(Material.JUNGLE_LOG) || material.equals(Material.SPRUCE_LOG))
+				|| material.equals(Material.OAK_LOG)) {
 			((DoubleAxeAbilities) cItem).chopTree(player, block, cStack);
 		} else if (cItem instanceof SickleAbilities) {
 			((SickleAbilities) cItem).onUse(breakEvent, cStack, block, player);
@@ -50,7 +50,7 @@ public class BlockBreakListener implements Listener {
 			((HammerAbilities) cItem).onUse(block, lastBlockFace.get(uuid), cStack, player);
 		}
 	}
-	
+
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onInteract(PlayerInteractEvent event) {
 		if (event.isCancelled())
