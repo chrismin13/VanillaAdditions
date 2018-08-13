@@ -5,18 +5,14 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.chrismin13.additionsapi.items.CustomItemStack;
 import com.chrismin13.vanillaadditions.VanillaAdditions;
-import com.chrismin13.vanillaadditions.listeners.BlockBreakListener;
 
 public class TreeFeller {
 
@@ -300,19 +296,8 @@ public class TreeFeller {
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 				@Override
 				public void run() {
-					BlockBreakListener.blocksBeingBroken.add(currentBlock);
-					BlockBreakEvent event = new BlockBreakEvent(currentBlock, player);
-
-					Bukkit.getPluginManager().callEvent(event);
-					BlockBreakListener.blocksBeingBroken.remove(currentBlock);
-					if (!event.isCancelled()) {
-						if (cStack.getItemStack() != null) {
-							currentBlock.breakNaturally(cStack.getItemStack());
-							TreeFeller.popLeaves(currentBlock, cStack.getItemStack(), player);
-						} else {
-							currentBlock.breakNaturally();
-							TreeFeller.popLeaves(currentBlock, null, player);
-						}
+					if (!BlockUtils.breakBlock(currentBlock, cStack, player)) {
+						TreeFeller.popLeaves(currentBlock, cStack, player);
 					}
 					// if (useParticleLIB)
 					// ParticleEffect.BLOCK_CRACK.sendData(players, (double)
@@ -325,7 +310,7 @@ public class TreeFeller {
 		}
 	}
 
-	public static void popLeaves(Block block, final ItemStack item, Player player) {
+	public static void popLeaves(Block block, final CustomItemStack cStack, Player player) {
 		Long delay = 0L;
 		// final Collection<? extends Player> players =
 		// Bukkit.getOnlinePlayers();
@@ -339,16 +324,7 @@ public class TreeFeller {
 							// @SuppressWarnings("deprecation")
 							@Override
 							public void run() {
-								BlockBreakListener.blocksBeingBroken.add(target);
-								BlockBreakEvent event = new BlockBreakEvent(target, player);
-
-								Bukkit.getPluginManager().callEvent(event);
-								BlockBreakListener.blocksBeingBroken.remove(target);
-								if (!event.isCancelled())
-									if (item != null)
-										target.breakNaturally(item);
-									else
-										target.breakNaturally();
+								BlockUtils.breakBlock(target, cStack, player);
 								// if (useParticleLIB)
 								// ParticleEffect.BLOCK_CRACK.sendData(players,
 								// (double) target.getX(),

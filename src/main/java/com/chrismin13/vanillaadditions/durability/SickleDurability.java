@@ -6,12 +6,12 @@ import com.chrismin13.additionsapi.durability.ItemDurability;
 
 public class SickleDurability extends ItemDurability {
 
-	@SuppressWarnings("deprecation")
 	public SickleDurability() {
-		addSpecialBlock(Material.getMaterial(59), 1);
-		addSpecialBlock(Material.getMaterial(141), 1);
-		addSpecialBlock(Material.getMaterial(142), 1);
-		addSpecialBlock(Material.getMaterial(207), 1);
+		addSpecialBlock(Material.CROPS, 1);
+		addSpecialBlock(Material.CARROT, 1);
+		addSpecialBlock(Material.POTATO, 1);
+		addSpecialBlock(Material.BEETROOT_BLOCK, 1);
+		addSpecialBlock(Material.NETHER_WARTS, 1);
 		setBlockBreak(1);
 		setEntityHit(2);
 	}

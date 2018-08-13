@@ -2,22 +2,23 @@ package com.chrismin13.vanillaadditions.abilities;
 
 import java.util.ArrayList;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
 
 import com.chrismin13.additionsapi.items.CustomItemStack;
 import com.chrismin13.additionsapi.items.CustomTool;
 import com.chrismin13.additionsapi.recipes.CustomShapedRecipe;
 import com.chrismin13.additionsapi.recipes.RecipeIngredient;
 import com.chrismin13.additionsapi.utils.MaterialUtils;
-import com.chrismin13.vanillaadditions.listeners.BlockBreakListener;
+import com.chrismin13.vanillaadditions.VanillaAdditions;
+import com.chrismin13.vanillaadditions.utils.BlockUtils;
 
 public interface HammerAbilities {
 
+	boolean onlyBreakSameType = VanillaAdditions.getInstance().getConfig().getBoolean("hammer.only-break-same-type");
+	
 	default void onUse(Block block, BlockFace face, CustomItemStack cStack, Player player) {
 		ArrayList<Block> blocks = new ArrayList<>();
 		switch (face) {
@@ -57,18 +58,21 @@ public interface HammerAbilities {
 		default:
 			break;
 		}
-		BlockBreakListener.blocksBeingBroken.addAll(blocks);
 		for (Block blockToBreak : blocks) {
-			if (!blockToBreak.getDrops(cStack.getItemStack()).isEmpty()) {
-				BlockBreakEvent event = new BlockBreakEvent(blockToBreak, player);
-				Bukkit.getPluginManager().callEvent(event);
-				if (!event.isCancelled())
-					blockToBreak.breakNaturally(cStack.getItemStack());
+			if (shouldBreakBlock(blockToBreak, block.getType(), cStack)) {
+				BlockUtils.breakBlock(blockToBreak, cStack, player);
 			}
 		}
-		BlockBreakListener.blocksBeingBroken.removeAll(blocks);
 	}
 
+	default boolean shouldBreakBlock(Block blockToBreak, Material originalBlockMaterial, CustomItemStack cStack) {
+		if (onlyBreakSameType) {
+			return blockToBreak.getType().equals(originalBlockMaterial);
+		} else {
+			return !blockToBreak.getDrops(cStack.getItemStack()).isEmpty();
+		}
+	}
+	
 	default void modifyCustomItem(CustomTool cTool, Material craftingMaterial) {
 		modifyCustomItem(cTool, new RecipeIngredient(craftingMaterial));
 	}
