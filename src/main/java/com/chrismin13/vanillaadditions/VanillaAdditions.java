@@ -56,10 +56,10 @@ public class VanillaAdditions extends JavaPlugin {
 
 		String path = getDataFolder() + File.separator + "config.yml";
 		YamlConfiguration config = YamlConfiguration.loadConfiguration(new File(path));
-
+		
 		boolean versionChanged = false;
 
-		if (config.getInt("config-version") == 0) {
+		if (config.getInt("config-version", 0) == 0) {
 			config.set("config-version", 1);
 
 			List<String> mechanics = config.getStringList("enabled-mechanics");
@@ -87,6 +87,14 @@ public class VanillaAdditions extends JavaPlugin {
 			ench.add("NULL");
 			config.set("blacklisted-enchantments", ench);
 
+			versionChanged = true;
+		}
+
+		if (config.getInt("config-version") == 3) {
+			config.set("config-version", 4);
+			
+			config.set("hammer.only-break-same-type", false);
+			
 			versionChanged = true;
 		}
 
@@ -121,14 +129,16 @@ public class VanillaAdditions extends JavaPlugin {
 						+ "\n#                      hand of an Armor Stand by holding it in your Off Hand)"
 						+ "\n#                    - OPEN_BOOK_IN_ITEM_FRAME (Open any book in an Item"
 						+ "\n#                      frame by right clicking on it! No need to take it out.) " + "\n= #"
-						+ "\n------=======-------=======-------=======-------=======-------=======----- #"
-				        + "\n = #" +
-						"\n # blacklisted-enchantments: This list contains any enchantments that won't\n" +
-						"#                           be changed when enchanting the Lapis Items.\n" +
-						"#                           Their names can be found in the Spigot Docs:\n" +
-						"#                           http://bit.ly/2Ccin0C\n" +
-						"= #\n" +
-						"------=======-------=======-------=======-------=======-------=======----- #");
+						+ "\n------=======-------=======-------=======-------=======-------=======----- #" + "\n = #"
+						+ "\n # blacklisted-enchantments: This list contains any enchantments that won't\n"
+						+ "#                           be changed when enchanting the Lapis Items.\n"
+						+ "#                           Their names can be found in the Spigot Docs:\n"
+						+ "#                           http://bit.ly/2Ccin0C\n" + "= #\n"
+						+ "------=======-------=======-------=======-------=======-------=======----- #" + "\r\n"
+						+ "# hammer: Change properties for the hammer\r\n"
+						+ "#         - only-break-same-type: Only break blocks that are of the same \r\n"
+						+ "#                                 type as the one you originally mined.\r\n" + "= #\r\n"
+						+ "------=======-------=======-------=======-------=======-------=======----- #");
 				config.save(path);
 			} catch (IOException e) {
 				Debug.sayError(
@@ -143,8 +153,8 @@ public class VanillaAdditions extends JavaPlugin {
 
 		ArrayList<Enchantment> blacklistedEnchantments = new ArrayList<>();
 		try {
-			if (this.getConfig().getStringList("blacklisted-enchantments") != null && !this.getConfig().getStringList
-					("blacklisted-enchantments").isEmpty()) {
+			if (this.getConfig().getStringList("blacklisted-enchantments") != null
+					&& !this.getConfig().getStringList("blacklisted-enchantments").isEmpty()) {
 				List<String> blacklist = this.getConfig().getStringList("blacklisted-enchantments");
 				for (String ench : blacklist) {
 					if (!ench.equalsIgnoreCase("NULL")) {
@@ -154,9 +164,9 @@ public class VanillaAdditions extends JavaPlugin {
 				}
 			}
 		} catch (Exception e) {
-			Debug.sayError("Vanilla Additions encountered a problem reading the Blacklisted Enchantments list for " +
-					"the Lapis Tools and Armor. Please check that you have set up the enchantments with the correct " +
-					"names, according to this list: http://bit.ly/2Ccin0C");
+			Debug.sayError("Vanilla Additions encountered a problem reading the Blacklisted Enchantments list for "
+					+ "the Lapis Tools and Armor. Please check that you have set up the enchantments with the correct "
+					+ "names, according to this list: http://bit.ly/2Ccin0C");
 		}
 
 		VanillaAdditions.blacklistedEnchantments = blacklistedEnchantments;

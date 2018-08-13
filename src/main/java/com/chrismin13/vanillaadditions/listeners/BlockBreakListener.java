@@ -21,11 +21,11 @@ import com.chrismin13.additionsapi.items.CustomItemStack;
 import com.chrismin13.vanillaadditions.abilities.DoubleAxeAbilities;
 import com.chrismin13.vanillaadditions.abilities.HammerAbilities;
 import com.chrismin13.vanillaadditions.abilities.SickleAbilities;
+import com.chrismin13.vanillaadditions.utils.BlockUtils;
 
 public class BlockBreakListener implements Listener {
 
 	HashMap<UUID, BlockFace> lastBlockFace = new HashMap<>();
-	public static ArrayList<Block> blocksBeingBroken = new ArrayList<>();
 
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onCustomItemBlockBreak(CustomItemBlockBreakEvent event) {
@@ -38,7 +38,7 @@ public class BlockBreakListener implements Listener {
 		Block block = breakEvent.getBlock();
 		Material material = block.getType();
 		UUID uuid = player.getUniqueId();
-		if (BlockBreakListener.blocksBeingBroken.contains(block))
+		if (BlockUtils.isBlockIgnored(block))
 			return;
 		if (cItem instanceof DoubleAxeAbilities && (material.equals(Material.ACACIA_LOG)
 				|| material.equals(Material.BIRCH_LOG) || material.equals(Material.DARK_OAK_LOG)
@@ -50,7 +50,7 @@ public class BlockBreakListener implements Listener {
 			((HammerAbilities) cItem).onUse(block, lastBlockFace.get(uuid), cStack, player);
 		}
 	}
-
+	
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onInteract(PlayerInteractEvent event) {
 		if (event.isCancelled())

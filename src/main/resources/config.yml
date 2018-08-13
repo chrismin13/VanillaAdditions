@@ -43,8 +43,14 @@
 # #                           http://bit.ly/2Ccin0C
 # = #
 # ------=======-------=======-------=======-------=======-------=======----- #
+# = #
+# # hammer: Change properties for the hammer
+# #         - only-break-same-type: Only break blocks that are of the same 
+# #                                 type as the one you originally mined.
+# = #
+# ------=======-------=======-------=======-------=======-------=======----- #
 
-config-version: 3
+config-version: 4
 
 enabled-recipes:
     - SLABS_TO_FULL_BLOCKS
@@ -59,3 +65,6 @@ enabled-mechanics:
 
 blacklisted-enchantments:
     - NULL
+    
+hammer:
+  only-break-same-type: false
