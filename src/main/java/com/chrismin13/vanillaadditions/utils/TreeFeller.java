@@ -296,7 +296,7 @@ public class TreeFeller {
 			Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 				@Override
 				public void run() {
-					if (!BlockUtils.breakBlock(currentBlock, cStack, player)) {
+					if (BlockUtils.breakBlock(currentBlock, cStack, player)) {
 						TreeFeller.popLeaves(currentBlock, cStack, player);
 					}
 					// if (useParticleLIB)
@@ -324,7 +324,7 @@ public class TreeFeller {
 							// @SuppressWarnings("deprecation")
 							@Override
 							public void run() {
-								BlockUtils.breakBlock(target, cStack, player);
+								BlockUtils.breakBlock(target, cStack, player, true);
 								// if (useParticleLIB)
 								// ParticleEffect.BLOCK_CRACK.sendData(players,
 								// (double) target.getX(),

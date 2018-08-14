@@ -64,10 +64,11 @@ public class NetherrackItemsListener implements Listener {
 			}
 		}
 
-		CustomItemBlockIgniteEvent cEvent = new CustomItemBlockIgniteEvent(
-				new BlockIgniteEvent(blockClicked, IgniteCause.FLINT_AND_STEEL, blockAir), cStack);
+		BlockIgniteEvent bEvent = new BlockIgniteEvent(blockClicked, IgniteCause.FLINT_AND_STEEL, player, blockAir);
+		CustomItemBlockIgniteEvent cEvent = new CustomItemBlockIgniteEvent(bEvent, cStack);
+		Bukkit.getPluginManager().callEvent(bEvent);
 		Bukkit.getPluginManager().callEvent(cEvent);
-		if (!cEvent.isCancelled()) {
+		if (!bEvent.isCancelled() && !cEvent.isCancelled()) {
 			blockAir.setType(Material.FIRE);
 			blockAir.setData((byte) 0);
 			player.playSound(blockAir.getLocation(), Sound.ITEM_FLINTANDSTEEL_USE, 1F, 1F);

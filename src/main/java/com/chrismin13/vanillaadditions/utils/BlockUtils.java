@@ -57,6 +57,16 @@ public class BlockUtils {
 	}
 
 	public static boolean breakBlock(Block block, CustomItemStack cStack, Player player) {
+		return breakBlock(block, cStack, player, false);
+	}
+
+	public static boolean breakBlock(Block block, CustomItemStack cStack, Player player, boolean cancelDurability) {
+		final Integer currentDurability;
+		if (cancelDurability && cStack.getCustomItem().hasFakeDurability())
+			currentDurability = cStack.getFakeDurability();
+		else
+			currentDurability = null;
+
 		addIgnoreBlocks(block);
 		BlockBreakEvent event = new BlockBreakEvent(block, player);
 
@@ -88,6 +98,10 @@ public class BlockUtils {
 			else
 				block.breakNaturally();
 		removeIgnoreBlocks(block);
+		
+		if (currentDurability != null)
+			cStack.setFakeDurability(currentDurability);
+		
 		return !event.isCancelled();
 	}
 }
