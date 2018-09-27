@@ -57,15 +57,16 @@ public class NetherrackItemsListener implements Listener {
 				return;
 			} else if (cItem instanceof NetherrackHoe
 					&& (materialClicked == Material.GRASS || materialClicked == Material.GRASS_PATH
-							|| (materialClicked == Material.PODZOL))) {
+							|| materialClicked == Material.PODZOL)) {
 				return;
 			}
 		}
 
-		CustomItemBlockIgniteEvent cEvent = new CustomItemBlockIgniteEvent(
-				new BlockIgniteEvent(blockClicked, IgniteCause.FLINT_AND_STEEL, blockAir), cStack);
+		BlockIgniteEvent bEvent = new BlockIgniteEvent(blockClicked, IgniteCause.FLINT_AND_STEEL, player, blockAir);
+		CustomItemBlockIgniteEvent cEvent = new CustomItemBlockIgniteEvent(bEvent, cStack);
+		Bukkit.getPluginManager().callEvent(bEvent);
 		Bukkit.getPluginManager().callEvent(cEvent);
-		if (!cEvent.isCancelled()) {
+		if (!bEvent.isCancelled() && !cEvent.isCancelled()) {
 			blockAir.setType(Material.FIRE);
 			player.playSound(blockAir.getLocation(), Sound.ITEM_FLINTANDSTEEL_USE, 1F, 1F);
 			cStack.reduceDurability(player, 1);
