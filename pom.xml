@@ -46,6 +46,15 @@
 				</executions>
 			</plugin>
 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<finalName>VanillaAdditions-for-1.13</finalName>                   
+				</configuration>
+			</plugin> 
+
 		</plugins>
 	</build>
 
@@ -90,28 +99,24 @@
 			<id>md_5-releases</id>
 			<url>https://repo.md-5.net/content/repositories/releases/</url>
 		</repository>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
-		<!-- If you are compiling this from the GitHub Repo, change systemPath 
-			to a Additions API jar that is located on your computer. -->
 		<dependency>
-			<groupId>AdditionsAPI</groupId>
-			<artifactId>com.chrismin13</artifactId>
-			<scope>system</scope>
-			<version>latest</version>
-			<systemPath>C:/Users/chris/OneDrive/Eclipse Workspace/Test Server/plugins/AdditionsAPI.jar</systemPath>
+			<groupId>org.spigotmc</groupId>
+			<artifactId>spigot-api</artifactId>
+			<version>1.13.2-R0.1-SNAPSHOT</version>
+			<scope>provided</scope>
 		</dependency>
 
-		<!-- If you are compiling this from the GitHub Repo, change systemPath 
-			to a Spigot jar of that version that is located on your computer. There is 
-			no maven repo that satisfies the dependencies in NMS, this is the best solution -->
 		<dependency>
-			<groupId>Spigot</groupId>
-			<artifactId>org.spigotmc</artifactId>
-			<version>1.13</version>
-			<scope>system</scope>
-			<systemPath>C:/Users/chris/OneDrive/Eclipse Workspace/Test Server/spigot-1.13.jar</systemPath>
+			<groupId>com.github.chrismin13</groupId>
+			<artifactId>additionsapi</artifactId>
+			<version>spigot-1.13-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>
@@ -125,6 +130,13 @@
 			<artifactId>nocheatplus</artifactId>
 			<version>3.16.1-SNAPSHOT</version>
 			<scope>provided</scope>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/io.netty/netty-buffer -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-buffer</artifactId>
+			<version>4.1.38.Final</version>
 		</dependency>
 	</dependencies>
 
