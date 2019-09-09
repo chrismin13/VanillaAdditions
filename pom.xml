@@ -46,6 +46,15 @@
 				</executions>
 			</plugin>
 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<finalName>VanillaAdditions-for-1.9-1.12</finalName>                   
+				</configuration>
+			</plugin> 
+
 		</plugins>
 	</build>
 
@@ -121,6 +130,13 @@
 			<artifactId>nocheatplus</artifactId>
 			<version>3.16.1-SNAPSHOT</version>
 			<scope>provided</scope>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/io.netty/netty-buffer -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-buffer</artifactId>
+			<version>4.1.38.Final</version>
 		</dependency>
 	</dependencies>
 
