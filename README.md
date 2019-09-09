@@ -1,3 +1,3 @@
 # README #
 
-This is the private repo for the Spigot plugin Vanilla Additions. How did you get here?!
+There are two branches, one for 1.12 and below and one for 1.13. Choose the correct one from the menu above.
